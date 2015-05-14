@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Roslyn.Compilers;
 using Roslyn.Compilers.CSharp;
 using Roslyn.Compilers.Common;
+using Microsoft.Win32;                      // For OpenFileDialog
+using System.IO;                            // For StreamReader
 
 namespace itestall
 {
@@ -26,9 +28,10 @@ namespace itestall
         // Bindingを使う際のバインド変数の宣言
         public string FileName { get; set; }
         public string Result { get; set; }
-
         // 解析結果表示モード　（０：ノード、１：トークン）
         public int anlMode = 0;
+        // 解析結果ファイル
+        public String TargetFile;
 
         public MainWindow()
         {
@@ -86,12 +89,14 @@ namespace itestall
                     {}
                 }
             ";
+            StreamReader sr = new StreamReader(TargetFile, Encoding.GetEncoding("UTF-8"));
+            var sourceCode2 = sr.ReadToEnd();
 
             /// 画面をクリアする
             TxtbResult.Text = "";
 
             /// ファイルを解析する
-            var syntaxTree = SyntaxTree.ParseText(sourceCode);          // ソースコードをパースしてシンタックス ツリーに
+            var syntaxTree = SyntaxTree.ParseText(sourceCode2);         // ソースコードをパースしてシンタックス ツリーに
             var rootNode = syntaxTree.GetRoot();                        // ルートのノードを取得
 
             // ブロック処理のサンプル
@@ -166,6 +171,14 @@ namespace itestall
         /// </summary>
         private void BtnRef_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.FileName = "";
+            openFileDialog1.DefaultExt = "*.cs";
+            if (openFileDialog1.ShowDialog() == true)
+            {
+                TargetFile = openFileDialog1.FileName;
+                TxtbSrc.Text = openFileDialog1.FileName;
+            }
 
         }
 

@@ -11,7 +11,7 @@
         <Button x:Name="BtnRef" Content="参照" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnRef_Click" Canvas.Left="508" Canvas.Top="29"/>
         <Label x:Name="LblTgt" Content="ターゲット" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="70" Canvas.Left="10" Canvas.Top="29"/>
         <Button x:Name="BtnAnalyze" Content="解析" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnAnalyze_Click" Canvas.Left="321" Canvas.Top="89"/>
-        <TextBox x:Name="TxtbResult" Height="437" Canvas.Left="54" TextWrapping="Wrap" Canvas.Top="161" Width="1197" Text="{Binding Result}" Initialized="TxtbResult_Initialized"/>
+        <TextBox x:Name="TxtbResult" Height="437" Canvas.Left="54" TextWrapping="Wrap" Canvas.Top="161" Width="1197" Text="{Binding Result}" Initialized="TxtbResult_Initialized" VerticalScrollBarVisibility="Auto"/>
         <Button x:Name="BtnEnd" Content="完了" Height="26" Canvas.Left="1026" Canvas.Top="610" Width="96" Click="BtnEnd_Click"/>
         <Button x:Name="BtnCancel" Content="キャンセル" Height="26" Canvas.Left="1144" Canvas.Top="610" Width="96" Click="BtnCancel_Click"/>
         <GroupBox x:Name="groupBox1" Header="解析モード" Height="74" Canvas.Left="88" Canvas.Top="72" Width="218">
