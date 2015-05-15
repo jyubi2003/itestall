@@ -17,6 +17,7 @@ using Roslyn.Compilers.CSharp;
 using Roslyn.Compilers.Common;
 using Microsoft.Win32;                      // For OpenFileDialog
 using System.IO;                            // For StreamReader
+using System.Xml;                           // For XmlWriter
 
 namespace itestall
 {
@@ -28,7 +29,7 @@ namespace itestall
         // Bindingを使う際のバインド変数の宣言
         public string FileName { get; set; }
         public string Result { get; set; }
-        // 解析結果表示モード　（０：ノード、１：トークン）
+        // 解析結果表示モード　（０：ノード、１：トークン、２：XML）
         public int anlMode = 0;
         // 解析結果ファイル
         public String TargetFile;
@@ -76,24 +77,14 @@ namespace itestall
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// </summary>
         private void BtnAnalyze_Click(object sender, RoutedEventArgs e)
         {
-            // 解析する C# のソースコード
-            var sourceCode = @"
-                using System;
- 
-                class Program
-                {
-                    static void Main()
-                    {}
-                }
-            ";
-            StreamReader sr = new StreamReader(TargetFile, Encoding.GetEncoding("UTF-8"));
-            var sourceCode2 = sr.ReadToEnd();
-
             /// 画面をクリアする
             TxtbResult.Text = "";
+
+            // 指定されたファイルを読み込む
+            StreamReader sr = new StreamReader(TargetFile, Encoding.GetEncoding("UTF-8"));
+            var sourceCode2 = sr.ReadToEnd();
 
             /// ファイルを解析する
             var syntaxTree = SyntaxTree.ParseText(sourceCode2);         // ソースコードをパースしてシンタックス ツリーに
@@ -109,16 +100,39 @@ namespace itestall
             //                );
 
             // 解析結果の表示
-            if (anlMode == 0) { 
+            if (anlMode == 0)
+            {
                 Walker1 walker1 = new Walker1();                                        // 生成
                 walker1.Node += new Walker1.NodeEventHandler(this.EventClass_Node);     // イベントハンドラーの登録
-
                 walker1.Visit(rootNode);                                                // 解析
-            } else {
+
+            }
+            else if (anlMode == 1)
+            {
                 Walker2 walker2 = new Walker2();                                        // 生成
                 walker2.Token += new Walker2.TokenEventHandler(this.EventClass_Token);  // イベントハンドラーの登録
                 walker2.Visit(rootNode);                                                // 解析
+
             }
+            else
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                using (Stream stream = new MemoryStream())
+                {
+                    using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                    {
+                        new Walker3(writer).Visit(rootNode);
+                    }
+
+                    //
+                    // ストリームのポジションを戻してから出力.
+                    //
+                    stream.Position = 0;
+                    TxtbResult.Text += new StreamReader(stream).ReadToEnd();
+                }
+            }
+
 
         }
 
@@ -157,9 +171,14 @@ namespace itestall
             var radioButton = (RadioButton)sender;
             if (radioButton.Name.Equals("radioButton1")) {
                 this.anlMode = 0;                                   // ノードモード
-            } else
+            }
+            else if (radioButton.Name.Equals("radioButton2"))
             {
                 this.anlMode = 1;                                   // トークンモード
+            }
+            else
+            {
+                this.anlMode = 2;                                   // XML出力モード
             }
         }
 
