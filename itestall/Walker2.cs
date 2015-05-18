@@ -38,8 +38,13 @@ namespace itestall
         //イベントデリゲートの宣言
         public event TokenEventHandler Token;
 
+        //イベント引数の宣言
+        TokenEventArgs eventArg;
+
         public Walker2() : base(depth: SyntaxWalkerDepth.Token) // トークンの深さまで Visit
-        { }
+        {
+            eventArg = new TokenEventArgs();
+        }
 
         protected virtual void OnToken(TokenEventArgs e)
         {
@@ -54,7 +59,6 @@ namespace itestall
             if (token != null)
             {
                 // Console.WriteLine("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind, node);
-                TokenEventArgs eventArg = new TokenEventArgs();
                 eventArg.Message = string.Format("[Token - Type: {0}, Kind: {1}]\n{2}\n", token.GetType().Name, token.Kind(), token);
                 OnToken(eventArg);
             }
