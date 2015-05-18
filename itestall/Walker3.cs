@@ -12,16 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Roslyn.Compilers;
-using Roslyn.Compilers.CSharp;
-using Roslyn.Compilers.Common;
+//using Roslyn.Compilers;
+//using Roslyn.Compilers.CSharp;
+//using Roslyn.Compilers.Common;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.IO;
 using System.Xml;
 
 
 namespace itestall
 {
-    class Walker3 : SyntaxWalker
+    class Walker3 : CSharpSyntaxWalker
     {
         /*
         //デリゲートの宣言

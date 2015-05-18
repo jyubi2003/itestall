@@ -12,9 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Roslyn.Compilers;
-using Roslyn.Compilers.CSharp;
-using Roslyn.Compilers.Common;
+//using Roslyn.Compilers;
+//using Roslyn.Compilers.CSharp;
+//using Roslyn.Compilers.Common;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace itestall
 {
@@ -52,7 +55,7 @@ namespace itestall
             if (node != null) {
                 // Console.WriteLine("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind, node);
                 NodeEventArgs eventArg = new NodeEventArgs();
-                eventArg.Message = string.Format("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind, node);
+                eventArg.Message = string.Format("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind(), node);
                 OnNode(eventArg);
             }
             base.Visit(node);

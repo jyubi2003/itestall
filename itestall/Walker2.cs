@@ -12,9 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Roslyn.Compilers;
-using Roslyn.Compilers.CSharp;
-using Roslyn.Compilers.Common;
+//using Roslyn.Compilers;
+//using Roslyn.Compilers.CSharp;
+//using Roslyn.Compilers.Common;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace itestall
 {
@@ -46,13 +49,13 @@ namespace itestall
             }
         }
 
-        public override void VisitToken(SyntaxToken token) // 各トークンを Visit
+        protected override void VisitToken(SyntaxToken token) // 各トークンを Visit
         {
             if (token != null)
             {
                 // Console.WriteLine("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind, node);
                 TokenEventArgs eventArg = new TokenEventArgs();
-                eventArg.Message = string.Format("[Token - Type: {0}, Kind: {1}]\n{2}\n", token.GetType().Name, token.Kind, token);
+                eventArg.Message = string.Format("[Token - Type: {0}, Kind: {1}]\n{2}\n", token.GetType().Name, token.Kind(), token);
                 OnToken(eventArg);
             }
             base.VisitToken(token);

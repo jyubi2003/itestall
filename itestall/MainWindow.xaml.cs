@@ -12,9 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Roslyn.Compilers;
-using Roslyn.Compilers.CSharp;
-using Roslyn.Compilers.Common;
+//using Roslyn.Compilers;
+//using Roslyn.Compilers.CSharp;
+//using Roslyn.Compilers.Common;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Win32;                      // For OpenFileDialog
 using System.IO;                            // For StreamReader
 using System.Xml;                           // For XmlWriter
@@ -48,6 +51,7 @@ namespace itestall
         /// <param name=""></param>
         /// <param name="e"></param>
         /// </summary>
+        /*
         static BlockSyntax CreateHelloWorldBlock()
         {
             var invocationExpression = Syntax.InvocationExpression(       // Console.WriteLine("Hello world!");
@@ -71,6 +75,7 @@ namespace itestall
             var statement = Syntax.ExpressionStatement(expression: invocationExpression);
             return Syntax.Block(statement);
         }
+        */
 
         /// <summary>
         /// 指定されたファイルの解析
@@ -84,10 +89,10 @@ namespace itestall
 
             // 指定されたファイルを読み込む
             StreamReader sr = new StreamReader(TargetFile, Encoding.GetEncoding("UTF-8"));
-            var sourceCode2 = sr.ReadToEnd();
+            var sourceCode = sr.ReadToEnd();
 
             /// ファイルを解析する
-            var syntaxTree = SyntaxTree.ParseText(sourceCode2);         // ソースコードをパースしてシンタックス ツリーに
+            var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);         // ソースコードをパースしてシンタックス ツリーに
             var rootNode = syntaxTree.GetRoot();                        // ルートのノードを取得
 
             // ブロック処理のサンプル
