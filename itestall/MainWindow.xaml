@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:itestall"
         mc:Ignorable="d"
-        Title="MainWindow" Height="680" Width="1280">
+        Title="ソース解析(ITestAll)" Height="680" Width="1280">
     <Canvas RenderTransformOrigin="0.416,0.474" Margin="0,0,-8,-30">
         <TextBox x:Name="TxtbSrc" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="398" Canvas.Left="88" Canvas.Top="29" Text="{Binding FileName}"/>
         <Button x:Name="BtnRef" Content="参照" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnRef_Click" Canvas.Left="508" Canvas.Top="29"/>

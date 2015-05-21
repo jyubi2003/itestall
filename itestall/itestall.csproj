@@ -131,6 +131,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ItestallNode.cs" />
+    <Compile Include="ITreeNode.cs" />
+    <Compile Include="TreeNodeBase.cs" />
     <Compile Include="Walker1.cs" />
     <Compile Include="Walker2.cs" />
     <Compile Include="Walker3.cs" />

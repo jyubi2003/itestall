@@ -21,11 +21,42 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace itestall
 {
-    //Nodeイベントで返されるデータ
-    //ここではstring型のひとつのデータのみ返すものとする
+    //Tokenイベントで返されるデータ
+    //string型のメッセージとノードの参照を返す
     public class TokenEventArgs : EventArgs
     {
-        public string Message;
+        /// <summary>
+        /// イベントのメッセージフィールド
+        /// </summary>
+        protected string message;
+        public String Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                message = value;
+            }
+        }
+
+        /// <summary>
+        /// イベントのノードフィールド
+        /// </summary>
+        protected ItestallTreeNode node;
+        public ItestallTreeNode Node
+        {
+            get
+            {
+                return node;
+            }
+            set
+            {
+                node = value;
+            }
+        }
+
     }
 
 
