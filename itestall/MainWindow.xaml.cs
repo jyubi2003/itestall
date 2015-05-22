@@ -92,8 +92,8 @@ namespace itestall
             var sourceCode = sr.ReadToEnd();
 
             /// ファイルを解析する
-            var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);         // ソースコードをパースしてシンタックス ツリーに
-            var rootNode = syntaxTree.GetRoot();                        // ルートのノードを取得
+            var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);        // ソースコードをパースしてシンタックス ツリーに
+            var rootNode = syntaxTree.GetRoot();                            // ルートのノードを取得
 
             // ツリーノードのルートを作る
             ItestallTreeNode root = new ItestallTreeNode();

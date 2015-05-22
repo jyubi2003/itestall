@@ -132,8 +132,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ItestallNode.cs" />
-    <Compile Include="ITreeNode.cs" />
-    <Compile Include="TreeNodeBase.cs" />
     <Compile Include="Walker1.cs" />
     <Compile Include="Walker2.cs" />
     <Compile Include="Walker3.cs" />
@@ -182,6 +180,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0-rc2\tools\analyzers\C#\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0-rc2\tools\analyzers\C#\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <Import Project="..\template\template.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

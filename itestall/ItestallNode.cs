@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itestall.treenode;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace itestall
 {
@@ -11,8 +15,23 @@ namespace itestall
         /// <summary>
         /// ノードの名前フィールド
         /// </summary>
-        protected string name = null;
+        protected SyntaxNode node = null;
+        public SyntaxNode Node
+        {
+            get
+            {
+                return node;
+            }
+            set
+            {
+                node = value;
+            }
+        }
 
+        /// <summary>
+        /// ノードの名前フィールド
+        /// </summary>
+        protected string name = null;
         public string Name
         {
             get
@@ -29,7 +48,6 @@ namespace itestall
         /// ノードのタイプフィールド
         /// </summary>
         protected string type = null;
-
         public string Type
         {
             get
@@ -46,7 +64,6 @@ namespace itestall
         /// ノードの種別フィールド
         /// </summary>
         protected string kind = null;
-
         public string Kind
         {
             get
@@ -62,7 +79,7 @@ namespace itestall
         /// <summary>
         /// ノードのコンストラクタ
         /// </summary>
-        public ItestallTreeNode() {}
+        //public ItestallTreeNode() {}
 
     }
 

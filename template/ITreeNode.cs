@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// itestallアプリケーション個別のテンプレート名前空間
 /// </summary>
 /// <typeparam name="T"></typeparam>
-namespace itestall.template
+namespace itestall.treenode
 {
     /// <summary>
     /// ツリー構造のインターフェース
