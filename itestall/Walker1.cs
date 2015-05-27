@@ -89,7 +89,6 @@ namespace itestall
             if (node != null) {
                 // Console.WriteLine("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind, node);
                 eventArg.Message = string.Format("[Node  - Type: {0}, Kind: {1}]\n{2}\n", node.GetType().Name, node.Kind(), node);
-                eventArg.Node.Node = node;
                 OnNode(eventArg);                   // デリゲート経由で画面のバッククラスのイベントハンドラを呼ぶ
             }
             base.Visit(node);
