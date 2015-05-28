@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 //using Roslyn.Compilers;
 //using Roslyn.Compilers.CSharp;
 //using Roslyn.Compilers.Common;
@@ -29,6 +30,15 @@ namespace itestall
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        #region Private State
+        private TreeViewItem _currentSelection;
+        private bool _isNavigatingFromSourceToTree;
+        private bool _isNavigatingFromTreeToSource;
+        private readonly System.Windows.Forms.PropertyGrid _propertyGrid;
+        private static readonly Thickness s_defaultBorderThickness = new Thickness(1);
+        #endregion
+        
         // Bindingを使う際のバインド変数の宣言
         public string FileName { get; set; }
         public string Result { get; set; }
@@ -77,6 +87,39 @@ namespace itestall
         }
         */
 
+        #region Private Helpers - Other
+        private void DisplaySymbolInPropertyGrid(ISymbol symbol)
+        {
+            if (symbol == null)
+            {
+                typeTextLabel.Visibility = Visibility.Hidden;
+                kindTextLabel.Visibility = Visibility.Hidden;
+                typeValueLabel.Content = string.Empty;
+                kindValueLabel.Content = string.Empty;
+            }
+            else
+            {
+                typeTextLabel.Visibility = Visibility.Visible;
+                kindTextLabel.Visibility = Visibility.Visible;
+                typeValueLabel.Content = symbol.GetType().Name;
+                kindValueLabel.Content = symbol.Kind.ToString();
+            }
+
+            _propertyGrid.SelectedObject = symbol;
+        }
+
+        private static TreeViewItem FindTreeViewItem(DependencyObject source)
+        {
+            while (source != null && !(source is TreeViewItem))
+            {
+                source = VisualTreeHelper.GetParent(source);
+            }
+
+            return (TreeViewItem)source;
+        }
+        #endregion
+
+        #region Event Handlers
         /// <summary>
         /// 指定されたファイルの解析
         /// </summary>
@@ -184,7 +227,7 @@ namespace itestall
         /// </summary>
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            var radioButton = (RadioButton)sender;
+            var radioButton = (System.Windows.Controls.RadioButton)sender;
             if (radioButton.Name.Equals("radioButton1")) {
                 this.anlMode = 0;                                   // ノードモード
             }
@@ -206,7 +249,7 @@ namespace itestall
         /// </summary>
         private void BtnRef_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
             openFileDialog1.FileName = "";
             openFileDialog1.DefaultExt = "*.cs";
             if (openFileDialog1.ShowDialog() == true)
@@ -249,5 +292,63 @@ namespace itestall
         {
 
         }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (treeView.SelectedItem != null)
+            {
+                _currentSelection = (TreeViewItem)treeView.SelectedItem;
+            }
+        }
+
+        private void TreeView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = FindTreeViewItem((DependencyObject)e.OriginalSource);
+
+            if (item != null)
+            {
+                item.Focus();
+            }
+        }
+
+        private void TreeView_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            var directedSyntaxGraphEnabled =
+                (SyntaxNodeDirectedGraphRequested != null) &&
+                (SyntaxTokenDirectedGraphRequested != null) &&
+                (SyntaxTriviaDirectedGraphRequested != null);
+
+            var symbolDetailsEnabled =
+                (SemanticModel != null) &&
+                (((SyntaxTag)_currentSelection.Tag).Category == SyntaxCategory.SyntaxNode);
+
+            if ((!directedSyntaxGraphEnabled) && (!symbolDetailsEnabled))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                directedSyntaxGraphMenuItem.Visibility = directedSyntaxGraphEnabled ? Visibility.Visible : Visibility.Collapsed;
+                symbolDetailsMenuItem.Visibility = symbolDetailsEnabled ? Visibility.Visible : Visibility.Collapsed;
+                typeSymbolDetailsMenuItem.Visibility = symbolDetailsMenuItem.Visibility;
+                convertedTypeSymbolDetailsMenuItem.Visibility = symbolDetailsMenuItem.Visibility;
+                aliasSymbolDetailsMenuItem.Visibility = symbolDetailsMenuItem.Visibility;
+                constantValueDetailsMenuItem.Visibility = symbolDetailsMenuItem.Visibility;
+                menuItemSeparator1.Visibility = symbolDetailsMenuItem.Visibility;
+                menuItemSeparator2.Visibility = symbolDetailsMenuItem.Visibility;
+            }
+        }
+
+        /// <summary>
+        /// 結果表示テキストボックスの初期化処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// </summary>
+        private void LegendButton_Click(object sender, EventArgs e)
+        {
+            legendPopup.IsOpen = true;
+        }
+        #endregion
     }
 }
