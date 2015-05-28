@@ -7,13 +7,9 @@
         mc:Ignorable="d"
         Title="ソース解析(ITestAll)" Height="680" Width="1280">
     <Canvas RenderTransformOrigin="0.416,0.474" Margin="0,0,-8,-30">
+        <Label x:Name="LblTgt" Content="ターゲット" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="70" Canvas.Left="10" Canvas.Top="29"/>
         <TextBox x:Name="TxtbSrc" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="398" Canvas.Left="88" Canvas.Top="29" Text="{Binding FileName}"/>
         <Button x:Name="BtnRef" Content="参照" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnRef_Click" Canvas.Left="508" Canvas.Top="29"/>
-        <Label x:Name="LblTgt" Content="ターゲット" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="70" Canvas.Left="10" Canvas.Top="29"/>
-        <Button x:Name="BtnAnalyze" Content="解析" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnAnalyze_Click" Canvas.Left="321" Canvas.Top="89"/>
-        <TextBox x:Name="TxtbResult" Height="406" Canvas.Left="54" TextWrapping="Wrap" Canvas.Top="192" Width="1197" Text="{Binding Result}" Initialized="TxtbResult_Initialized" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="BtnEnd" Content="完了" Height="26" Canvas.Left="1026" Canvas.Top="610" Width="96" Click="BtnEnd_Click"/>
-        <Button x:Name="BtnCancel" Content="キャンセル" Height="26" Canvas.Left="1144" Canvas.Top="610" Width="96" Click="BtnCancel_Click"/>
         <GroupBox x:Name="groupBox1" Header="解析モード" Height="100" Canvas.Left="88" Canvas.Top="72" Width="218">
             <StackPanel Margin="0,0,0,5">
                 <RadioButton x:Name="radioButton1" GroupName="groupBox1" Content="ノード解析" Height="26" Canvas.Left="110" Canvas.Top="95" Width="120" Margin="8,0,78,0" Checked="RadioButton_Checked" IsChecked="True"/>
@@ -21,5 +17,9 @@
                 <RadioButton x:Name="radioButton3" GroupName="groupBox1" Content="XML出力" Height="26" Canvas.Left="110" Canvas.Top="95" Width="120" Margin="8,0,78,0" Checked="RadioButton_Checked" IsChecked="False"/>
             </StackPanel>
         </GroupBox>
+        <Button x:Name="BtnAnalyze" Content="解析" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="96" Click="BtnAnalyze_Click" Canvas.Left="321" Canvas.Top="89"/>
+        <TextBox x:Name="TxtbResult" Height="406" Canvas.Left="54" TextWrapping="Wrap" Canvas.Top="192" Width="600" Text="{Binding Result}" Initialized="TxtbResult_Initialized" VerticalScrollBarVisibility="Auto"/>
+        <Button x:Name="BtnEnd" Content="完了" Height="26" Canvas.Left="1026" Canvas.Top="610" Width="96" Click="BtnEnd_Click"/>
+        <Button x:Name="BtnCancel" Content="キャンセル" Height="26" Canvas.Left="1144" Canvas.Top="610" Width="96" Click="BtnCancel_Click"/>
     </Canvas>
 </Window>
