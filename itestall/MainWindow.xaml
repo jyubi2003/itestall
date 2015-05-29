@@ -87,7 +87,7 @@
                     <ContextMenu Name="treeViewItemContextMenu">
                         <MenuItem Name="directedSyntaxGraphMenuItem" Header="View Directed Syntax Graph" Click="DirectedSyntaxGraphMenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Height="16" Width="16" Source="/Roslyn.SyntaxVisualizer.Control;component/SyntaxGraph.ico" />
+                                <Image Height="16" Width="16" Source="/SyntaxGraph.ico" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Name="menuItemSeparator1" />

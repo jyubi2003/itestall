@@ -22,14 +22,35 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Win32;                      // For OpenFileDialog
 using System.IO;                            // For StreamReader
 using System.Xml;                           // For XmlWriter
+using Microsoft.VisualStudio.TextManager.Interop;    // For TextSpan
 
 namespace itestall
 {
+    public enum SyntaxCategory
+    {
+        None,
+        SyntaxNode,
+        SyntaxToken,
+        SyntaxTrivia
+    }
+
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private class SyntaxTag
+        {
+            internal TextSpan Span { get; set; }
+            internal TextSpan FullSpan { get; set; }
+            internal TreeViewItem ParentItem { get; set; }
+            internal string Kind { get; set; }
+            internal SyntaxNode SyntaxNode { get; set; }
+            internal SyntaxToken SyntaxToken { get; set; }
+            internal SyntaxTrivia SyntaxTrivia { get; set; }
+            internal SyntaxCategory Category { get; set; }
+        }
 
         #region Private State
         private TreeViewItem _currentSelection;
@@ -38,6 +59,23 @@ namespace itestall
         private readonly System.Windows.Forms.PropertyGrid _propertyGrid;
         private static readonly Thickness s_defaultBorderThickness = new Thickness(1);
         #endregion
+
+        #region Public Properties, Events
+        public SyntaxTree SyntaxTree { get; private set; }
+        public SemanticModel SemanticModel { get; private set; }
+        public bool IsLazy { get; private set; }
+
+        public delegate void SyntaxNodeDelegate(SyntaxNode node);
+        public event SyntaxNodeDelegate SyntaxNodeDirectedGraphRequested;
+        public event SyntaxNodeDelegate SyntaxNodeNavigationToSourceRequested;
+
+        public delegate void SyntaxTokenDelegate(SyntaxToken token);
+        public event SyntaxTokenDelegate SyntaxTokenDirectedGraphRequested;
+        public event SyntaxTokenDelegate SyntaxTokenNavigationToSourceRequested;
+
+        public delegate void SyntaxTriviaDelegate(SyntaxTrivia trivia);
+        public event SyntaxTriviaDelegate SyntaxTriviaDirectedGraphRequested;
+        public event SyntaxTriviaDelegate SyntaxTriviaNavigationToSourceRequested;
         
         // Bindingを使う際のバインド変数の宣言
         public string FileName { get; set; }
@@ -46,7 +84,9 @@ namespace itestall
         public int anlMode = 0;
         // 解析結果ファイル
         public String TargetFile;
+        #endregion
 
+        #region Public Methods
         public MainWindow()
         {
             InitializeComponent();
@@ -54,6 +94,7 @@ namespace itestall
             // Bindingを使う際のデータコンテキストの設定
             this.DataContext = this;
         }
+        #endregion
 
         /// <summary>
         /// ブロック処理のサンプルで置き換えるソースブロックを生成する処理
