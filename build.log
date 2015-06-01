@@ -2,7 +2,7 @@ Microsoft (R) Build Engine バージョン 14.0.22823.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
 このソリューション内のプロジェクトを 1 度に 1 つずつビルドします。並行ビルドを有効にするには、"/m" スイッチを追加してください。
-2015/05/29 14:33:15 にビルドを開始しました。
+2015/06/01 14:59:06 にビルドを開始しました。
 ノード 1 上のプロジェクト "D:\GitHub\itestall\itestall.sln" (既定のターゲット)。
 ツール バージョン "2.0" でビルドしています。
 ファイル "D:\GitHub\itestall\itestall.sln.metaproj" 内にある、プロジェクト "D:\GitHub\itestall\itestall.sln" からのターゲット "ValidateSolutionConfiguration" (エントリ ポイント):
@@ -1710,9 +1710,9 @@ false 条件のため、タスク "Message" を省略しました。('$(MSBuildTargetsVerbose)' =
 タスク "GenerateTemporaryTargetAssembly"
 プロジェクト "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" のターゲット "GetFrameworkPaths" をプロジェクト "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.NetFramework.CurrentVersion.targets" からのターゲット "GetFrameworkPaths" でオーバーライドしています。
 プロジェクト "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" のターゲット "SatelliteDllsProjectOutputGroup" をプロジェクト "C:\windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.WinFx.targets" からのターゲット "SatelliteDllsProjectOutputGroup" でオーバーライドしています。
-プロジェクト "D:\GitHub\itestall\itestall\itestall.csproj" (2) は、ノード 1 上に "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" (3) をビルドしています (_CompileTemporaryAssembly ターゲット)。
+プロジェクト "D:\GitHub\itestall\itestall\itestall.csproj" (2) は、ノード 1 上に "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" (3) をビルドしています (_CompileTemporaryAssembly ターゲット)。
 ツール バージョン "14.0" でビルドしています。
-ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "_CheckForInvalidConfigurationAndPlatform" (エントリ ポイント):
+ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "_CheckForInvalidConfigurationAndPlatform" (エントリ ポイント):
 false 条件のため、タスク "Error" を省略しました。( '$(_InvalidConfigurationError)' == 'true' ) は ( '' == 'true' ) として評価されました。
 false 条件のため、タスク "Warning" を省略しました。( '$(_InvalidConfigurationWarning)' == 'true' ) は ( '' == 'true' ) として評価されました。
 タスク "Message"
@@ -1724,28 +1724,28 @@ false 条件のため、タスク "Warning" を省略しました。( '$(_InvalidConfigurationWar
 false 条件のため、タスク "Error" を省略しました。('$(OutDir)' != '' and !HasTrailingSlash('$(OutDir)')) は ('bin\Debug\' != '' and !HasTrailingSlash('bin\Debug\')) として評価されました。
 false 条件のため、タスク "Error" を省略しました。('$(BaseIntermediateOutputPath)' != '' and !HasTrailingSlash('$(BaseIntermediateOutputPath)')) は ('obj\' != '' and !HasTrailingSlash('obj\')) として評価されました。
 false 条件のため、タスク "Error" を省略しました。('$(IntermediateOutputPath)' != '' and !HasTrailingSlash('$(IntermediateOutputPath)')) は ('obj\Debug\' != '' and !HasTrailingSlash('obj\Debug\')) として評価されました。
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "_CheckForInvalidConfigurationAndPlatform" のビルドが終了しました。
-ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "BuildOnlySettings" (ターゲット "_CompileTemporaryAssembly" は依存):
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "BuildOnlySettings" のビルドが終了しました。
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "_CheckForInvalidConfigurationAndPlatform" のビルドが終了しました。
+ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "BuildOnlySettings" (ターゲット "_CompileTemporaryAssembly" は依存):
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "BuildOnlySettings" のビルドが終了しました。
 false 条件により、ターゲット "ResolveKeySource" を省略しました。($(SignManifests) == 'true' or $(SignAssembly) == 'true') は ( == 'true' or  == 'true') として評価されました。
 false 条件により、ターゲット "_ComputeNonExistentFileProperty" を省略しました。(('$(BuildingInsideVisualStudio)' == 'true') and ('$(BuildingOutOfProcess)' != 'true') and (('$(BuildingProject)' == 'false') or ('$(UseHostCompilerIfAvailable)' == 'true'))) は (('' == 'true') and ('' != 'true') and (('true' == 'false') or ('true' == 'true'))) として評価されました。
-ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "ResolveCodeAnalysisRuleSet" (ターゲット "CoreCompile" は依存):
+ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "ResolveCodeAnalysisRuleSet" (ターゲット "CoreCompile" は依存):
 "ResolveCodeAnalysisRuleSet" タスクをアセンブリ "Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" から使用しています。
 タスク "ResolveCodeAnalysisRuleSet"
 タスク "ResolveCodeAnalysisRuleSet" の実行が終了しました。
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "ResolveCodeAnalysisRuleSet" のビルドが終了しました。
-ファイル "C:\windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.ServiceModel.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "PreXsdCodeGen" (ターゲット "CoreCompile" は依存):
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "ResolveCodeAnalysisRuleSet" のビルドが終了しました。
+ファイル "C:\windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.ServiceModel.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "PreXsdCodeGen" (ターゲット "CoreCompile" は依存):
 "CallTarget" タスクをアセンブリ "Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" から使用しています。
 タスク "CallTarget"
-ファイル "C:\windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.ServiceModel.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "CleanXsdCodeGen" (ターゲット "PreXsdCodeGen" は依存):
+ファイル "C:\windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.ServiceModel.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "CleanXsdCodeGen" (ターゲット "PreXsdCodeGen" は依存):
 "Delete" タスクをアセンブリ "Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" から使用しています。
 タスク "Delete"
 タスク "Delete" の実行が終了しました。
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "CleanXsdCodeGen" のビルドが終了しました。
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "CleanXsdCodeGen" のビルドが終了しました。
 タスク "CallTarget" の実行が終了しました。
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "PreXsdCodeGen" のビルドが終了しました。
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "PreXsdCodeGen" のビルドが終了しました。
 false 条件により、ターゲット "XsdCodeGen" を省略しました。( '$(XsdCodeGenPreCondition)' == 'True' ) は ( 'False' == 'True' ) として評価されました。
-ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" からのターゲット "CoreCompile" (ターゲット "_CompileTemporaryAssembly" は依存):
+ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" からのターゲット "CoreCompile" (ターゲット "_CompileTemporaryAssembly" は依存):
 ターゲット "CoreCompile" を完全にビルドしています。
 出力ファイル "obj\Debug\itestall.exe" は存在しません。
 "Csc" タスクをアセンブリ "Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" から使用しています。
@@ -1760,16 +1760,16 @@ false 条件により、ターゲット "XsdCodeGen" を省略しました。( '$(XsdCodeGenPreCond
   MainWindow.xaml(96,105): エラー CS1061: 'MainWindow' に 'ConvertedTypeSymbolDetailsMenuItem_Click' の定義が含まれておらず、型 'MainWindow' の最初の引数を受け付ける拡張メソッド 'ConvertedTypeSymbolDetailsMenuItem_Click' が見つかりませんでした。using ディレクティブまたはアセンブリ参照が不足していないことを確認してください。
   MainWindow.xaml(97,97): エラー CS1061: 'MainWindow' に 'AliasSymbolDetailsMenuItem_Click' の定義が含まれておらず、型 'MainWindow' の最初の引数を受け付ける拡張メソッド 'AliasSymbolDetailsMenuItem_Click' が見つかりませんでした。using ディレクティブまたはアセンブリ参照が不足していないことを確認してください。
   MainWindow.xaml(99,99): エラー CS1061: 'MainWindow' に 'ConstantValueDetailsMenuItem_Click' の定義が含まれておらず、型 'MainWindow' の最初の引数を受け付ける拡張メソッド 'ConstantValueDetailsMenuItem_Click' が見つかりませんでした。using ディレクティブまたはアセンブリ参照が不足していないことを確認してください。
-  MainWindow.xaml.cs(58,22): 警告 CS0169: フィールド 'MainWindow._isNavigatingFromTreeToSource' は使用されていません。
-  MainWindow.xaml.cs(78,43): 警告 CS0067: イベント 'MainWindow.SyntaxTriviaNavigationToSourceRequested' は使用されていません。
-  MainWindow.xaml.cs(70,41): 警告 CS0067: イベント 'MainWindow.SyntaxNodeNavigationToSourceRequested' は使用されていません。
-  MainWindow.xaml.cs(59,60): 警告 CS0649: フィールド 'MainWindow._propertyGrid' は割り当てられません。常に既定値 null を使用します。
   MainWindow.xaml.cs(74,42): 警告 CS0067: イベント 'MainWindow.SyntaxTokenNavigationToSourceRequested' は使用されていません。
   MainWindow.xaml.cs(57,22): 警告 CS0169: フィールド 'MainWindow._isNavigatingFromSourceToTree' は使用されていません。
-C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets(384,9): error MSB6006: "csc2.exe" はコード 1 を伴って終了しました。 [D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj]
+  MainWindow.xaml.cs(58,22): 警告 CS0169: フィールド 'MainWindow._isNavigatingFromTreeToSource' は使用されていません。
+  MainWindow.xaml.cs(59,60): 警告 CS0649: フィールド 'MainWindow._propertyGrid' は割り当てられません。常に既定値 null を使用します。
+  MainWindow.xaml.cs(70,41): 警告 CS0067: イベント 'MainWindow.SyntaxNodeNavigationToSourceRequested' は使用されていません。
+  MainWindow.xaml.cs(78,43): 警告 CS0067: イベント 'MainWindow.SyntaxTriviaNavigationToSourceRequested' は使用されていません。
+C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets(384,9): error MSB6006: "csc2.exe" はコード 1 を伴って終了しました。 [D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj]
 タスク "Csc" の実行が終了しました -- 失敗。
-プロジェクト "gbsbxmph.tmp_proj" 内のターゲット "CoreCompile" のビルドが終了しました -- 失敗。
-プロジェクト "D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" (_CompileTemporaryAssembly ターゲット) のビルドが終了しました -- 失敗。
+プロジェクト "i1pyoauu.tmp_proj" 内のターゲット "CoreCompile" のビルドが終了しました -- 失敗。
+プロジェクト "D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" (_CompileTemporaryAssembly ターゲット) のビルドが終了しました -- 失敗。
 タスク "GenerateTemporaryTargetAssembly" の実行が終了しました -- 失敗。
 プロジェクト "itestall.csproj" 内のターゲット "GenerateTemporaryTargetAssembly" のビルドが終了しました -- 失敗。
 ファイル "C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" 内にある、プロジェクト "D:\GitHub\itestall\itestall\itestall.csproj" からのターゲット "_CheckForCompileOutputs" (ターゲット "_CleanGetCurrentAndPriorFileWrites" は依存):
@@ -1814,11 +1814,11 @@ false 条件により、ターゲット "_SGenCheckForOutputs" を省略しました。('$(_SGenGen
 
 "D:\GitHub\itestall\itestall.sln" (既定のターゲット) (1) ->
 "D:\GitHub\itestall\itestall\itestall.csproj" (既定のターゲット) (2) ->
-"D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj" (_CompileTemporaryAssembly ターゲット) (3) ->
+"D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj" (_CompileTemporaryAssembly ターゲット) (3) ->
 (CoreCompile ターゲット) -> 
-  C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets(384,9): error MSB6006: "csc2.exe" はコード 1 を伴って終了しました。 [D:\GitHub\itestall\itestall\gbsbxmph.tmp_proj]
+  C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.CSharp.CurrentVersion.targets(384,9): error MSB6006: "csc2.exe" はコード 1 を伴って終了しました。 [D:\GitHub\itestall\itestall\i1pyoauu.tmp_proj]
 
     0 個の警告
     1 エラー
 
-経過時間 00:00:01.24
+経過時間 00:00:02.26
