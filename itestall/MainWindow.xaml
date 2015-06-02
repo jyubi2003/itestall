@@ -31,15 +31,15 @@
             <Border Grid.Row="0" BorderThickness="1,1,1,0" BorderBrush="#FF828790" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" MinWidth="411"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto" MinWidth="57"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" VerticalAlignment="Center" Content="Syntax Tree" FontWeight="Bold"/>
-                    <Button Grid.Column="2" Name="legendButton" Click="LegendButton_Click" Visibility="Hidden" Margin="3" Padding="2" >
+                    <Label Grid.Column="0" VerticalAlignment="Center" Content="Syntax Tree" FontWeight="Bold" Height="28" Margin="0,2"/>
+                    <Button Grid.Column="2" x:Name="legendButton" Click="LegendButton_Click" Visibility="Hidden" Margin="3" Padding="2" >
                         <StackPanel>
-                            <TextBlock>Legend</TextBlock>
-                            <Popup StaysOpen="False" Name="legendPopup">
+                            <TextBlock><Run Text="Legend"/></TextBlock>
+                            <Popup StaysOpen="False" x:Name="legendPopup">
                                 <Border BorderThickness="1" BorderBrush="#FF828790">
                                     <Grid Background="White">
                                         <Grid.RowDefinitions>
@@ -64,8 +64,8 @@
                                         <Label Grid.Row="3" Grid.Column="1" Content="Trailing SyntaxTrivia" Margin="0,0,5,0"/>
                                         <Label Grid.Row="4" Grid.Column="0" Content="Pink" Background="Pink" Margin="10,0,0,5" Padding="5,1"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <Label Grid.Row="4" Grid.Column="1" Content="Has Diagnostics" Margin="0,0,5,5"/>
-                                        <Label Name="highlightLegendTextLabel" Visibility="Collapsed" Grid.Row="5" Grid.Column="0"  Content="Yellow" BorderThickness="1" BorderBrush="Black" Background="Yellow" Margin="10,-5,0,5" Padding="5,1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <Label Name="highlightLegendDescriptionLabel" Visibility="Collapsed" Grid.Row="5" Grid.Column="1" Content="Of Interest" Margin="0,-5,5,5"/>
+                                        <Label x:Name="highlightLegendTextLabel" Visibility="Collapsed" Grid.Row="5" Grid.Column="0"  Content="Yellow" BorderThickness="1" BorderBrush="Black" Background="Yellow" Margin="10,-5,0,5" Padding="5,1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <Label x:Name="highlightLegendDescriptionLabel" Visibility="Collapsed" Grid.Row="5" Grid.Column="1" Content="Of Interest" Margin="0,-5,5,5"/>
                                     </Grid>
                                 </Border>
                             </Popup>
@@ -73,7 +73,7 @@
                     </Button>
                 </Grid>
             </Border>
-            <TreeView Grid.Row="1" Name="treeView" SelectedItemChanged="TreeView_SelectedItemChanged" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" ContextMenuOpening="TreeView_ContextMenuOpening" Padding="5">
+            <TreeView Grid.Row="1" x:Name="treeView" SelectedItemChanged="TreeView_SelectedItemChanged" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" ContextMenuOpening="TreeView_ContextMenuOpening" Padding="5">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
                         <Style.Resources>
@@ -84,28 +84,29 @@
                     </Style>
                 </TreeView.ItemContainerStyle>
                 <TreeView.ContextMenu>
-                    <ContextMenu Name="treeViewItemContextMenu">
-                        <MenuItem Name="directedSyntaxGraphMenuItem" Header="View Directed Syntax Graph" Click="DirectedSyntaxGraphMenuItem_Click">
+                    <ContextMenu x:Name="treeViewItemContextMenu">
+                        <MenuItem x:Name="directedSyntaxGraphMenuItem" Header="View Directed Syntax Graph" Click="DirectedSyntaxGraphMenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Height="16" Width="16" Source="/SyntaxGraph.ico" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <Separator Name="menuItemSeparator1" />
-                        <MenuItem Name="symbolDetailsMenuItem" Header="View Symbol (if any)" Click="SymbolDetailsMenuItem_Click"/>
-                        <MenuItem Name="typeSymbolDetailsMenuItem" Header="View TypeSymbol (if any)" Click="TypeSymbolDetailsMenuItem_Click"/>
-                        <MenuItem Name="convertedTypeSymbolDetailsMenuItem" Header="View Converted TypeSymbol (if any)" Click="ConvertedTypeSymbolDetailsMenuItem_Click"/>
-                        <MenuItem Name="aliasSymbolDetailsMenuItem" Header="View AliasSymbol (if any)" Click="AliasSymbolDetailsMenuItem_Click"/>
-                        <Separator Name="menuItemSeparator2" />
-                        <MenuItem Name="constantValueDetailsMenuItem" Header="View Constant Value (if any)" Click="ConstantValueDetailsMenuItem_Click"/>
+                        <Separator x:Name="menuItemSeparator1" />
+                        <MenuItem x:Name="symbolDetailsMenuItem" Header="View Symbol (if any)" Click="SymbolDetailsMenuItem_Click"/>
+                        <MenuItem x:Name="typeSymbolDetailsMenuItem" Header="View TypeSymbol (if any)" Click="TypeSymbolDetailsMenuItem_Click"/>
+                        <MenuItem x:Name="convertedTypeSymbolDetailsMenuItem" Header="View Converted TypeSymbol (if any)" Click="ConvertedTypeSymbolDetailsMenuItem_Click"/>
+                        <MenuItem x:Name="aliasSymbolDetailsMenuItem" Header="View AliasSymbol (if any)" Click="AliasSymbolDetailsMenuItem_Click"/>
+                        <Separator x:Name="menuItemSeparator2" />
+                        <MenuItem x:Name="constantValueDetailsMenuItem" Header="View Constant Value (if any)" Click="ConstantValueDetailsMenuItem_Click"/>
                     </ContextMenu>
                 </TreeView.ContextMenu>
             </TreeView>
-            <GridSplitter Grid.Row="2" ResizeDirection="Rows" HorizontalAlignment="Stretch" Height="5"/>
+            <GridSplitter Grid.Row="3" ResizeDirection="Rows" HorizontalAlignment="Stretch" Margin="0,0,0,262" RenderTransformOrigin="0.5,0.5"/>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <WindowsFormsHost Grid.Row="1" x:Name="windowsFormsHost" Padding="5" />
                 <Border Grid.Row="0" BorderThickness="1,1,1,0" BorderBrush="#FF828790" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -115,16 +116,18 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="255*"/>
+                            <ColumnDefinition Width="26*"/>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="177*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Properties" FontWeight="Bold"/>
-                        <Label Grid.Row="1" Grid.Column="0" Name="typeTextLabel" Visibility="Hidden" Content="Type" Padding="5,2,5,2" Margin="20,0,0,0"/>
-                        <Label Grid.Row="1" Grid.Column="1" Name="typeValueLabel" Padding="5,2,5,2"/>
-                        <Label Grid.Row="2" Grid.Column="0" Name="kindTextLabel" Visibility="Hidden" Content="Kind" Padding="5,2,5,2" Margin="20,0,0,0"/>
-                        <Label Grid.Row="2" Grid.Column="1" Name="kindValueLabel" Padding="5,2,5,2"/>
+                        <Label Grid.Row="0" Grid.ColumnSpan="5" Content="Properties" FontWeight="Bold"/>
+                        <Label Grid.Row="1" Grid.Column="0" x:Name="typeTextLabel" Visibility="Hidden" Content="Type" Padding="5,2,5,2" Margin="20,0,0,0"/>
+                        <Label Grid.Row="1" Grid.Column="1" x:Name="typeValueLabel" Padding="5,2,5,2" Grid.ColumnSpan="4"/>
+                        <Label Grid.Row="2" Grid.Column="0" x:Name="kindTextLabel" Visibility="Hidden" Content="Kind" Padding="5,2,5,2" Margin="20,0,0,0"/>
+                        <Label Grid.Row="2" Grid.Column="1" x:Name="kindValueLabel" Padding="5,2,5,2" HorizontalAlignment="Left" Width="470" Grid.ColumnSpan="4"/>
                     </Grid>
                 </Border>
-                <!-- WindowsFormsHost Grid.Row="1" Name="windowsFormsHost" Padding="5" / -->
             </Grid>
         </Grid>
     </Canvas>

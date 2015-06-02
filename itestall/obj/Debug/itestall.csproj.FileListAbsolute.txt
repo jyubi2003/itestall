@@ -50,7 +50,6 @@ D:\Git_Hub\itestall\itestall\bin\Debug\System.Composition.Runtime.xml
 D:\Git_Hub\itestall\itestall\bin\Debug\System.Composition.TypedParts.xml
 D:\Git_Hub\itestall\itestall\bin\Debug\System.Reflection.Metadata.xml
 D:\Git_Hub\itestall\itestall\obj\Debug\itestall.csprojResolveAssemblyReference.cache
-D:\GitHub\itestall\itestall\obj\Debug\itestall.csprojResolveAssemblyReference.cache
 D:\GitHub\itestall\itestall\obj\Debug\MainWindow.g.cs
 D:\GitHub\itestall\itestall\obj\Debug\App.g.cs
 D:\GitHub\itestall\itestall\obj\Debug\itestall_MarkupCompile.cache

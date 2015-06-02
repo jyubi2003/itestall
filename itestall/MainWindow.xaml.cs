@@ -84,6 +84,129 @@ namespace itestall
 
             // Bindingを使う際のデータコンテキストの設定
             this.DataContext = this;
+
+            // プロパティウィンドウ部分の画面の初期化
+            _propertyGrid = new System.Windows.Forms.PropertyGrid();
+            _propertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            _propertyGrid.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
+            _propertyGrid.HelpVisible = false;
+            _propertyGrid.ToolbarVisible = false;
+            _propertyGrid.CommandsVisibleIfAvailable = false;
+            windowsFormsHost.Child = _propertyGrid;
+        }
+        public void Clear()
+        {
+            treeView.Items.Clear();
+            _propertyGrid.SelectedObject = null;
+            typeTextLabel.Visibility = Visibility.Hidden;
+            kindTextLabel.Visibility = Visibility.Hidden;
+            typeValueLabel.Content = string.Empty;
+            kindValueLabel.Content = string.Empty;
+            legendButton.Visibility = Visibility.Hidden;
+        }
+
+        // If lazy is true then treeview items are populated on-demand. In other words, when lazy is true
+        // the children for any given item are only populated when the item is selected. If lazy is
+        // false then the entire tree is populated at once (and this can result in bad performance when
+        // displaying large trees).
+        public void DisplaySyntaxTree(SyntaxTree tree, SemanticModel model = null, bool lazy = true)
+        {
+            if (tree != null)
+            {
+                IsLazy = lazy;
+                SyntaxTree = tree;
+                SemanticModel = model;
+                AddNode(null, SyntaxTree.GetRoot());
+                legendButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        // If lazy is true then treeview items are populated on-demand. In other words, when lazy is true
+        // the children for any given item are only populated when the item is selected. If lazy is
+        // false then the entire tree is populated at once (and this can result in bad performance when
+        // displaying large trees).
+        public void DisplaySyntaxNode(SyntaxNode node, SemanticModel model = null, bool lazy = true)
+        {
+            if (node != null)
+            {
+                IsLazy = lazy;
+                SyntaxTree = node.SyntaxTree;
+                SemanticModel = model;
+                AddNode(null, node);
+                legendButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        // Select the SyntaxNode / SyntaxToken / SyntaxTrivia whose position best matches the supplied position.
+        public bool NavigateToBestMatch(int position, string kind = null,
+            SyntaxCategory category = SyntaxCategory.None,
+            bool highlightMatch = false, string highlightLegendDescription = null)
+        {
+            TreeViewItem match = null;
+
+            if (treeView.HasItems && !_isNavigatingFromTreeToSource)
+            {
+                _isNavigatingFromSourceToTree = true;
+                match = NavigateToBestMatch((TreeViewItem)treeView.Items[0], position, kind, category);
+                _isNavigatingFromSourceToTree = false;
+            }
+
+            var matchFound = match != null;
+
+            if (highlightMatch && matchFound)
+            {
+                match.Background = Brushes.Yellow;
+                match.BorderBrush = Brushes.Black;
+                match.BorderThickness = s_defaultBorderThickness;
+                highlightLegendTextLabel.Visibility = Visibility.Visible;
+                highlightLegendDescriptionLabel.Visibility = Visibility.Visible;
+                if (!string.IsNullOrWhiteSpace(highlightLegendDescription))
+                {
+                    highlightLegendDescriptionLabel.Content = highlightLegendDescription;
+                }
+            }
+
+            return matchFound;
+        }
+
+        // Select the SyntaxNode / SyntaxToken / SyntaxTrivia whose span best matches the supplied span.
+        public bool NavigateToBestMatch(int start, int length, string kind = null,
+            SyntaxCategory category = SyntaxCategory.None,
+            bool highlightMatch = false, string highlightLegendDescription = null)
+        {
+            return NavigateToBestMatch(new TextSpan(start, length), kind, category, highlightMatch, highlightLegendDescription);
+        }
+
+        // Select the SyntaxNode / SyntaxToken / SyntaxTrivia whose span best matches the supplied span.
+        public bool NavigateToBestMatch(TextSpan span, string kind = null,
+            SyntaxCategory category = SyntaxCategory.None,
+            bool highlightMatch = false, string highlightLegendDescription = null)
+        {
+            TreeViewItem match = null;
+
+            if (treeView.HasItems && !_isNavigatingFromTreeToSource)
+            {
+                _isNavigatingFromSourceToTree = true;
+                match = NavigateToBestMatch((TreeViewItem)treeView.Items[0], span, kind, category);
+                _isNavigatingFromSourceToTree = false;
+            }
+
+            var matchFound = match != null;
+
+            if (highlightMatch && matchFound)
+            {
+                match.Background = Brushes.Yellow;
+                match.BorderBrush = Brushes.Black;
+                match.BorderThickness = s_defaultBorderThickness;
+                highlightLegendTextLabel.Visibility = Visibility.Visible;
+                highlightLegendDescriptionLabel.Visibility = Visibility.Visible;
+                if (!string.IsNullOrWhiteSpace(highlightLegendDescription))
+                {
+                    highlightLegendDescriptionLabel.Content = highlightLegendDescription;
+                }
+            }
+
+            return matchFound;
         }
         #endregion
 
@@ -248,7 +371,7 @@ namespace itestall
 
         private void AddNode(TreeViewItem parentItem, SyntaxNode node)
         {
-            var kind = "";                  // node.GetKind();
+            var kind = node.Kind().ToString();
             var tag = new SyntaxTag()
             {
                 SyntaxNode = node,
@@ -343,7 +466,7 @@ namespace itestall
 
         private void AddToken(TreeViewItem parentItem, SyntaxToken token)
         {
-            var kind = "";                  //token.GetKind();
+            var kind = token.Kind().ToString();
             var tag = new SyntaxTag()
             {
                 SyntaxToken = token,
@@ -448,7 +571,7 @@ namespace itestall
 
         private void AddTrivia(TreeViewItem parentItem, SyntaxTrivia trivia, bool isLeadingTrivia)
         {
-            var kind = "";              // trivia.GetKind();
+            var kind = trivia.Kind().ToString();
             var tag = new SyntaxTag()
             {
                 SyntaxTrivia = trivia,
@@ -718,10 +841,7 @@ namespace itestall
         {
             legendPopup.IsOpen = true;
         }
-        #endregion
 
-
-        #region Event Handlers
         /// <summary>
         /// 指定されたファイルの解析
         /// </summary>
@@ -897,16 +1017,6 @@ namespace itestall
 
         }
 
-        /// <summary>
-        /// 結果表示テキストボックスの初期化処理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// </summary>
-        private void LegendButton_Click(object sender, EventArgs e)
-        {
-            legendPopup.IsOpen = true;
-        }
         #endregion
     }
 }
