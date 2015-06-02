@@ -860,18 +860,20 @@ namespace itestall
             var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);        // ソースコードをパースしてシンタックス ツリーに
             var rootNode = syntaxTree.GetRoot();                            // ルートのノードを取得
 
-            AddNode(null, rootNode);
+            // ツリービューを表示する
+            // AddNode(null, rootNode);
+            DisplaySyntaxNode(rootNode);
 
             // ツリーノードのルートを作る
-            ItestallTreeNode root = new ItestallTreeNode();
+            //ItestallTreeNode root = new ItestallTreeNode();
 
-            ItestallTreeNode temp = new ItestallTreeNode();
-            temp.Name = "Child1";
-            root.AddChild(temp);
+            //ItestallTreeNode temp = new ItestallTreeNode();
+            //temp.Name = "Child1";
+            //root.AddChild(temp);
 
-            temp = new ItestallTreeNode();
-            temp.Name = "Child2";
-            root.AddChild(temp);
+            //temp = new ItestallTreeNode();
+            //temp.Name = "Child2";
+            //root.AddChild(temp);
 
             // ブロック処理のサンプル
             // Main メソッドのブロックを取得

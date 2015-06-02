@@ -91,3 +91,4 @@ D:\GitHub\itestall\itestall\obj\Debug\MainWindow.baml
 D:\GitHub\itestall\itestall\obj\Debug\itestall.g.resources
 D:\GitHub\itestall\itestall\obj\Debug\itestall.exe
 D:\GitHub\itestall\itestall\obj\Debug\itestall.pdb
+D:\GitHub\itestall\itestall\obj\Debug\itestall.csprojResolveAssemblyReference.cache
