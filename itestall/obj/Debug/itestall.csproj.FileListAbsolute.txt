@@ -91,4 +91,12 @@ D:\GitHub\itestall\itestall\obj\Debug\MainWindow.baml
 D:\GitHub\itestall\itestall\obj\Debug\itestall.g.resources
 D:\GitHub\itestall\itestall\obj\Debug\itestall.exe
 D:\GitHub\itestall\itestall\obj\Debug\itestall.pdb
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Data.dll
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.dll
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Graphviz.dll
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Serialization.dll
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.xml
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Data.xml
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Graphviz.xml
+D:\GitHub\itestall\itestall\bin\Debug\QuickGraph.Serialization.xml
 D:\GitHub\itestall\itestall\obj\Debug\itestall.csprojResolveAssemblyReference.cache
