@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuickGraph; // enables extension methods
 
 namespace graphtest
 {
@@ -23,6 +24,13 @@ namespace graphtest
         public MainWindow()
         {
             InitializeComponent();
+
+            var edges = new SEdge<int>[] { new SEdge<int>(1, 2), new SEdge<int>(0, 1) };
+            var graph = edges.ToAdjacencyGraph<int, SEdge<int>>(true /*edges*/);
+
+            foreach (var vertex in graph.Vertices)
+                foreach (var edge in graph.OutEdges(vertex))
+                    Console.WriteLine(edge);
         }
     }
 }

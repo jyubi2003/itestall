@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.CSharp;
 using System.IO;                            // For StreamReader
 using System.Xml;                           // For XmlWriter
+using System.Windows.Media.Imaging;         // For BitmapFrame
 // using Microsoft.VisualStudio.TextManager.Interop;    // For TextSpan
 
 namespace itestall
@@ -84,6 +85,9 @@ namespace itestall
 
             // Bindingを使う際のデータコンテキストの設定
             this.DataContext = this;
+
+            // ウィンドウアイコンの設定
+            Icon = BitmapFrame.Create(new Uri("pack://application:,,,/icon1.ico", UriKind.RelativeOrAbsolute));
 
             // プロパティウィンドウ部分の画面の初期化
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
