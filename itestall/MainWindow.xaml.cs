@@ -129,7 +129,7 @@ namespace itestall
         // the children for any given item are only populated when the item is selected. If lazy is
         // false then the entire tree is populated at once (and this can result in bad performance when
         // displaying large trees).
-        public void DisplaySyntaxNode(SyntaxNode node, SemanticModel model = null, bool lazy = true)
+        public void DisplaySyntaxNode(SyntaxNode node, SemanticModel model = null, bool lazy = false)
         {
             if (node != null)
             {
