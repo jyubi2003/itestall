@@ -76,6 +76,8 @@ namespace itestall
         public int anlMode = 0;
         // 解析結果ファイル
         public String TargetFile;
+        // 調査用Syntax項目全出力ファイル
+        public StreamWriter sw;
         #endregion
 
         #region Public Methods
@@ -376,6 +378,15 @@ namespace itestall
         private void AddNode(TreeViewItem parentItem, SyntaxNode node)
         {
             var kind = node.Kind().ToString();
+
+            // 全出力ファイルにノード情報を書き込む
+            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            System.Reflection.PropertyInfo[] prop = node.GetType().GetProperties();
+            foreach (System.Reflection.PropertyInfo info in prop)
+            {
+                sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name/* + "," + info.GetConstantValue().ToString()*/);
+            }
+
             var tag = new SyntaxTag()
             {
                 SyntaxNode = node,
@@ -471,6 +482,10 @@ namespace itestall
         private void AddToken(TreeViewItem parentItem, SyntaxToken token)
         {
             var kind = token.Kind().ToString();
+
+            // 全出力ファイルにトークン情報を書き込む
+            sw.WriteLine("TOKEN," + token.GetType().Name + "," + token.Kind().ToString() + "," + "\"" + token.ToString() + "\"");
+
             var tag = new SyntaxTag()
             {
                 SyntaxToken = token,
@@ -576,6 +591,10 @@ namespace itestall
         private void AddTrivia(TreeViewItem parentItem, SyntaxTrivia trivia, bool isLeadingTrivia)
         {
             var kind = trivia.Kind().ToString();
+
+            // 全出力ファイルにトリビア情報を書き込む
+            sw.WriteLine("TRIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + "\"" + trivia.ToString() + "\"");
+
             var tag = new SyntaxTag()
             {
                 SyntaxTrivia = trivia,
@@ -856,6 +875,12 @@ namespace itestall
             /// 画面をクリアする
             TxtbResult.Text = "";
 
+            // 全出力用ファイルをオープンする
+            sw = new StreamWriter("./AllSyntaxTag.txt", false);
+            sw.WriteLine("itestall All Syntax Tag File");
+            sw.WriteLine("FileName = "+ TargetFile);
+            sw.WriteLine("");
+
             // 指定されたファイルを読み込む
             StreamReader sr = new StreamReader(TargetFile, Encoding.GetEncoding("UTF-8"));
             var sourceCode = sr.ReadToEnd();
@@ -998,6 +1023,7 @@ namespace itestall
         /// </summary>
         private void BtnEnd_Click(object sender, RoutedEventArgs e)
         {
+            sw.Close();
             this.Close();
         }
 
@@ -1009,6 +1035,7 @@ namespace itestall
         /// </summary>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
+            sw.Close();
             this.Close();
         }
 
