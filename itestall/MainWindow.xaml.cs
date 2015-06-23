@@ -384,7 +384,7 @@ namespace itestall
             System.Reflection.PropertyInfo[] prop = node.GetType().GetProperties();
             foreach (System.Reflection.PropertyInfo info in prop)
             {
-                sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + info.ToString());
+                sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + node.GetType().GetProperty(info.Name));
             }
 
             var tag = new SyntaxTag()
