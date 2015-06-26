@@ -384,7 +384,7 @@ namespace itestall
             System.Reflection.PropertyInfo[] prop = node.GetType().GetProperties();
             foreach (System.Reflection.PropertyInfo info in prop)
             {
-                sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + node.GetType().GetProperty(info.Name));
+                sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + info.GetValue(node,null));
             }
 
             var tag = new SyntaxTag()
@@ -483,8 +483,13 @@ namespace itestall
         {
             var kind = token.Kind().ToString();
 
-            // 全出力ファイルにトークン情報を書き込む
-            sw.WriteLine("TOKEN," + token.GetType().Name + "," + token.Kind().ToString() + "," + "\"" + token.ToString() + "\"");
+            // 全出力ファイルにノード情報を書き込む
+            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            System.Reflection.PropertyInfo[] prop = token.GetType().GetProperties();
+            foreach (System.Reflection.PropertyInfo info in prop)
+            {
+                sw.WriteLine("Token," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
+            }
 
             var tag = new SyntaxTag()
             {
@@ -592,8 +597,13 @@ namespace itestall
         {
             var kind = trivia.Kind().ToString();
 
-            // 全出力ファイルにトリビア情報を書き込む
-            sw.WriteLine("TRIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + "\"" + trivia.ToString() + "\"");
+            // 全出力ファイルにノード情報を書き込む
+            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            System.Reflection.PropertyInfo[] prop = trivia.GetType().GetProperties();
+            foreach (System.Reflection.PropertyInfo info in prop)
+            {
+                sw.WriteLine("TORIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + info.Name + "," + info.GetValue(trivia, null));
+            }
 
             var tag = new SyntaxTag()
             {
