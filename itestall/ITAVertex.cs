@@ -76,5 +76,9 @@ namespace itestall
             return value;
         }
 
+        public override String ToString()
+        {
+            return category + "." + type + "." + kind;
+        }
     }
 }

@@ -14,6 +14,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "template", "template\templa
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "uml", "uml\uml.modelproj", "{40F62D77-B72E-477B-918E-3A8DC30959D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "graphtest", "graphtest\graphtest\graphtest.csproj", "{99B1B48D-77D6-4CA0-9E7C-8371AFDE435D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		template\template.projitems*{c28f8eb0-6867-4d35-a352-1c62e6bb9c0c}*SharedItemsImports = 4
@@ -32,6 +34,10 @@ Global
 		{40F62D77-B72E-477B-918E-3A8DC30959D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40F62D77-B72E-477B-918E-3A8DC30959D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40F62D77-B72E-477B-918E-3A8DC30959D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B1B48D-77D6-4CA0-9E7C-8371AFDE435D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B1B48D-77D6-4CA0-9E7C-8371AFDE435D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B1B48D-77D6-4CA0-9E7C-8371AFDE435D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B1B48D-77D6-4CA0-9E7C-8371AFDE435D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

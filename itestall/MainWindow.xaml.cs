@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.IO;                            // For StreamReader
 using System.Xml;                           // For XmlWriter
 using System.Windows.Media.Imaging;         // For BitmapFrame
-// using Microsoft.VisualStudio.TextManager.Interop;    // For TextSpan
+using QuickGraph;                           // enables extension methods
 
 namespace itestall
 {
@@ -903,16 +903,20 @@ namespace itestall
             // AddNode(null, rootNode);
             DisplaySyntaxNode(rootNode);
 
-            // ツリーノードのルートを作る
-            //ItestallTreeNode root = new ItestallTreeNode();
+            // グラフを作る（とりあえずここで動くかテスト）
+            ITAVertex vertex1 = new ITAVertex("NODE", "CompilationUnitSyntax", "CompilationUnit");
+            ITAVertex vertex2 = new ITAVertex("NODE", "UsingDirectiveSyntax", "UsingDirective");
+            ITAVertex vertex3 = new ITAVertex("TOKEN", "SyntaxToken", "UsingKeyword");
 
-            //ItestallTreeNode temp = new ItestallTreeNode();
-            //temp.Name = "Child1";
-            //root.AddChild(temp);
+            var edges = new SEdge<ITAVertex>[] {
+                new SEdge<ITAVertex>(vertex1, vertex2),
+                new SEdge<ITAVertex>(vertex2, vertex3) };
 
-            //temp = new ItestallTreeNode();
-            //temp.Name = "Child2";
-            //root.AddChild(temp);
+            var graph = edges.ToAdjacencyGraph<ITAVertex, SEdge<ITAVertex>>(true /*edges*/);
+
+            foreach (var vertex in graph.Vertices)
+                foreach (var edge in graph.OutEdges(vertex))
+                    sw.WriteLine(edge);
 
             // ブロック処理のサンプル
             // Main メソッドのブロックを取得
