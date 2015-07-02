@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -78,6 +79,13 @@ namespace itestall
         public String TargetFile;
         // 調査用Syntax項目全出力ファイル
         public StreamWriter sw;
+        // グラフ構造
+        internal AdjacencyGraph<ITAVertex, SEdge<ITAVertex>> graph;
+        // エッジの配列
+        ArrayList edges;
+        // 作業用Vertex
+        ITAVertex lastVertex;       // 最期のノード
+        ITAVertex branchVertex;     // 分岐のノード
         #endregion
 
         #region Public Methods
@@ -99,6 +107,11 @@ namespace itestall
             _propertyGrid.ToolbarVisible = false;
             _propertyGrid.CommandsVisibleIfAvailable = false;
             windowsFormsHost.Child = _propertyGrid;
+
+            // グラフの頂点を作っておく（実装を楽にするため）
+            lastVertex = new ITAVertex("Maker", "Start", "EndPoint");
+            // エッジの配列
+            edges = new ArrayList();
         }
         public void Clear()
         {
@@ -379,14 +392,23 @@ namespace itestall
         {
             var kind = node.Kind().ToString();
 
-            // 全出力ファイルにノード情報を書き込む
-            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            // ノードのプロパティでVertexを作る
+            ITAVertex curVertex = new ITAVertex("NODE", node.GetType().Name, node.Kind().ToString());
+            // ノードの各プロパティについてファイルに書き出し、ノードに登録する。
             System.Reflection.PropertyInfo[] prop = node.GetType().GetProperties();
             foreach (System.Reflection.PropertyInfo info in prop)
             {
+                // 全出力ファイルにプロパティを書き込む
                 sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + info.GetValue(node,null));
+                // プロパティをノードに登録する
+                curVertex.SetProperty(info.Name, info.GetValue(node, null)!=null ? info.GetValue(node, null).ToString(): "");
             }
+            // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
+            edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
+            // 今のノードを最期のノードにする。
+            lastVertex = curVertex;
 
+            // ここから画面にツリーを表示するオリジナルの処理
             var tag = new SyntaxTag()
             {
                 SyntaxNode = node,
@@ -485,12 +507,29 @@ namespace itestall
 
             // 全出力ファイルにノード情報を書き込む
             // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            // System.Reflection.PropertyInfo[] prop = token.GetType().GetProperties();
+            // foreach (System.Reflection.PropertyInfo info in prop)
+            // {
+            //    sw.WriteLine("Token," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
+            //}
+
+            // トークンのプロパティでVertexを作る
+            ITAVertex curVertex = new ITAVertex("TOKEN", token.GetType().Name, token.Kind().ToString());
+            // ノードの各プロパティについてファイルに書き出し、ノードに登録する。
             System.Reflection.PropertyInfo[] prop = token.GetType().GetProperties();
             foreach (System.Reflection.PropertyInfo info in prop)
             {
-                sw.WriteLine("Token," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
+                // 全出力ファイルにプロパティを書き込む
+                sw.WriteLine("TOKEN," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
+                // プロパティをノードに登録する
+                curVertex.SetProperty(info.Name, info.GetValue(token, null) != null ? info.GetValue(token, null).ToString() : "");
             }
+            // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
+            edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
+            // 今のノードを最期のノードにする。
+            lastVertex = curVertex;
 
+            // ここから画面にツリーを表示するオリジナルの処理
             var tag = new SyntaxTag()
             {
                 SyntaxToken = token,
@@ -599,12 +638,29 @@ namespace itestall
 
             // 全出力ファイルにノード情報を書き込む
             // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
+            // System.Reflection.PropertyInfo[] prop = trivia.GetType().GetProperties();
+            // foreach (System.Reflection.PropertyInfo info in prop)
+            // {
+            //    sw.WriteLine("TORIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + info.Name + "," + info.GetValue(trivia, null));
+            // }
+
+            // トークンのプロパティでVertexを作る
+            ITAVertex curVertex = new ITAVertex("TORIVIA", trivia.GetType().Name, trivia.Kind().ToString());
+            // ノードの各プロパティについてファイルに書き出し、ノードに登録する。
             System.Reflection.PropertyInfo[] prop = trivia.GetType().GetProperties();
             foreach (System.Reflection.PropertyInfo info in prop)
             {
+                // 全出力ファイルにプロパティを書き込む
                 sw.WriteLine("TORIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + info.Name + "," + info.GetValue(trivia, null));
+                // プロパティをノードに登録する
+                curVertex.SetProperty(info.Name, info.GetValue(trivia, null) != null ? info.GetValue(trivia, null).ToString() : "");
             }
+            // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
+            edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
+            // 今のノードを最期のノードにする。
+            lastVertex = curVertex;
 
+            // ここから画面にツリーを表示するオリジナルの処理
             var tag = new SyntaxTag()
             {
                 SyntaxTrivia = trivia,
@@ -903,17 +959,11 @@ namespace itestall
             // AddNode(null, rootNode);
             DisplaySyntaxNode(rootNode);
 
-            // グラフを作る（とりあえずここで動くかテスト）
-            ITAVertex vertex1 = new ITAVertex("NODE", "CompilationUnitSyntax", "CompilationUnit");
-            ITAVertex vertex2 = new ITAVertex("NODE", "UsingDirectiveSyntax", "UsingDirective");
-            ITAVertex vertex3 = new ITAVertex("TOKEN", "SyntaxToken", "UsingKeyword");
-
-            var edges = new SEdge<ITAVertex>[] {
-                new SEdge<ITAVertex>(vertex1, vertex2),
-                new SEdge<ITAVertex>(vertex2, vertex3) };
-
-            var graph = edges.ToAdjacencyGraph<ITAVertex, SEdge<ITAVertex>>(true /*edges*/);
-
+            // ArrayListを配列に変換
+            SEdge<ITAVertex>[] edges2 = (SEdge<ITAVertex>[])edges.ToArray(typeof(SEdge<ITAVertex>));
+            // エッジの配列からグラフを生成
+            graph = edges2.ToAdjacencyGraph<ITAVertex, SEdge<ITAVertex>>(true /*edges*/);
+            // グラフの各要素を出力
             foreach (var vertex in graph.Vertices)
                 foreach (var edge in graph.OutEdges(vertex))
                     sw.WriteLine(edge);

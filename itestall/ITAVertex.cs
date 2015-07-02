@@ -26,6 +26,7 @@ namespace itestall
             category = "";
             type = "";
             kind = "";
+            props = new SortedList<String, String>();
         }
 
         // コンストラクタ
@@ -34,6 +35,7 @@ namespace itestall
             category = aCategory;
             type = aType;
             kind = aKind;
+            props = new SortedList<String, String>();
         }
 
         // Kindの設定
@@ -78,6 +80,7 @@ namespace itestall
 
         public override String ToString()
         {
+            // ToDo：出力するものを増やす
             return category + "." + type + "." + kind;
         }
     }
