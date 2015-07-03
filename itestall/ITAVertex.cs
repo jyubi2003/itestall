@@ -80,8 +80,16 @@ namespace itestall
 
         public override String ToString()
         {
-            // ToDo：出力するものを増やす
-            return category + "." + type + "." + kind;
+            // 全てのプロパティを出力する
+            String RepProp = category + "." + type + "." + kind +"\n ";
+            foreach (KeyValuePair<string, string> pair in props) {
+                if (pair.Key != "SyntaxTree") {
+                    RepProp += pair.Key + "=" + pair.Value + "\n ";
+                }
+            }
+            RepProp += "\n";
+
+            return RepProp;
         }
     }
 }
