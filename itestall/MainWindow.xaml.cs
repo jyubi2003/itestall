@@ -401,7 +401,7 @@ namespace itestall
                 // 全出力ファイルにプロパティを書き込む
                 sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + info.Name + "," + info.GetValue(node,null));
                 // プロパティをノードに登録する
-                curVertex.SetProperty(info.Name, info.GetValue(node, null)!=null ? info.GetValue(node, null).ToString(): "");
+                curVertex.SetProperty(info.Name, info.GetValue(node, null)!=null ? info.GetValue(node, null).ToString(): "null");
             }
             // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
             edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
@@ -505,14 +505,6 @@ namespace itestall
         {
             var kind = token.Kind().ToString();
 
-            // 全出力ファイルにノード情報を書き込む
-            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
-            // System.Reflection.PropertyInfo[] prop = token.GetType().GetProperties();
-            // foreach (System.Reflection.PropertyInfo info in prop)
-            // {
-            //    sw.WriteLine("Token," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
-            //}
-
             // トークンのプロパティでVertexを作る
             ITAVertex curVertex = new ITAVertex("TOKEN", token.GetType().Name, token.Kind().ToString());
             // ノードの各プロパティについてファイルに書き出し、ノードに登録する。
@@ -522,7 +514,7 @@ namespace itestall
                 // 全出力ファイルにプロパティを書き込む
                 sw.WriteLine("TOKEN," + token.GetType().Name + "," + token.Kind().ToString() + "," + info.Name + "," + info.GetValue(token, null));
                 // プロパティをノードに登録する
-                curVertex.SetProperty(info.Name, info.GetValue(token, null) != null ? info.GetValue(token, null).ToString() : "");
+                curVertex.SetProperty(info.Name, info.GetValue(token, null) != null ? info.GetValue(token, null).ToString() : "null");
             }
             // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
             edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
@@ -636,14 +628,6 @@ namespace itestall
         {
             var kind = trivia.Kind().ToString();
 
-            // 全出力ファイルにノード情報を書き込む
-            // sw.WriteLine("NODE," + node.GetType().Name + "," + node.Kind().ToString() + "," + "\"" + node.GetText() + "\"" + "," + "\"" + node.GetText() + "\"");
-            // System.Reflection.PropertyInfo[] prop = trivia.GetType().GetProperties();
-            // foreach (System.Reflection.PropertyInfo info in prop)
-            // {
-            //    sw.WriteLine("TORIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + info.Name + "," + info.GetValue(trivia, null));
-            // }
-
             // トークンのプロパティでVertexを作る
             ITAVertex curVertex = new ITAVertex("TORIVIA", trivia.GetType().Name, trivia.Kind().ToString());
             // ノードの各プロパティについてファイルに書き出し、ノードに登録する。
@@ -653,7 +637,7 @@ namespace itestall
                 // 全出力ファイルにプロパティを書き込む
                 sw.WriteLine("TORIVIA," + trivia.GetType().Name + "," + trivia.Kind().ToString() + "," + info.Name + "," + info.GetValue(trivia, null));
                 // プロパティをノードに登録する
-                curVertex.SetProperty(info.Name, info.GetValue(trivia, null) != null ? info.GetValue(trivia, null).ToString() : "");
+                curVertex.SetProperty(info.Name, info.GetValue(trivia, null) != null ? info.GetValue(trivia, null).ToString() : "null");
             }
             // 最期のノードと今のノードでエッジを作り、エッジのリストに追加する。
             edges.Add(new SEdge<ITAVertex>(lastVertex, curVertex));
